@@ -9,6 +9,7 @@ import { GetMetadata } from './functions/GetMetadata.js';
 
 dotenv.config()
 import { getFirestore, collection, query, getDocs, where, setDoc, doc } from 'firebase/firestore/lite'
+import { RevealMetadata } from './functions/RevealMetadata.js';
 const firebaseConfig = {
     apiKey: process.env.fb_key,
     authDomain: process.env.authDomain,
@@ -29,6 +30,17 @@ if(db) {
 router.get('/get_metadata', async (req, res) => {
     try{
         const result = await GetMetadata(req)
+
+        res.json(result)
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, error: error})
+    }
+})
+
+router.get('/reveal_metadata', async (req, res) => {
+    try{
+        const result = await RevealMetadata(req)
 
         res.json(result)
     } catch (error) {
