@@ -25,12 +25,6 @@ app.use(
 );
 app.use(bodyParser.json());
 
-// /**
-//  * JWT Auth
-//  */
-// app.use(passport.initialize());
-// require('./auth/passport')(passport);
-
 /**
  * Routes
  */
