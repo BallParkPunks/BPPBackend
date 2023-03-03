@@ -8,7 +8,7 @@ import { getAnalytics } from "firebase/analytics";
 import { GetMetadata } from './functions/GetMetadata.js';
 
 dotenv.config()
-import { getFirestore, collection, query, getDocs, where, setDoc, doc } from 'firebase/firestore/lite'
+import { getFirestore } from 'firebase/firestore/lite'
 import { RevealMetadata } from './functions/RevealMetadata.js';
 const firebaseConfig = {
     apiKey: process.env.fb_key,
