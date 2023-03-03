@@ -8,6 +8,7 @@ import { initializeApp } from "firebase/app"
 import { ethers } from "ethers"
 import { getFirestore, collection, query, getDocs, setDoc, doc } from 'firebase/firestore/lite'
 import { nft_abi } from "../abi.js"
+import { GetProvider } from "./GetProvider.js"
 
 const firebaseConfig = {
     apiKey: process.env.fb_key,
@@ -25,9 +26,7 @@ const db = getFirestore(fb)
 export const VerifySignature = async(signature, address, message, tokenId) => {
     if((Date.now() - message) > 60000) return false;
 
-    let provider
-    if(process.env.state = "testing") provider = process.env.RPC_GOERLI
-    if(process.env.state = "production") ptovider = process.env.RPC_POLYGON
+    let provider = GetProvider( process.env.state === 'production' ? 'polygon' : 'goerli' )
 
     const contract = new ethers.Contract(process.env.bpp_contract, nft_abi, provider)
 
