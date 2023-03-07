@@ -10,6 +10,8 @@ import { GetMetadata } from './functions/GetMetadata.js';
 dotenv.config()
 import { getFirestore } from 'firebase/firestore/lite'
 import { RevealMetadata } from './functions/RevealMetadata.js';
+import { GetPrice } from './functions/GetPrice.js';
+import { GetTotalMints } from './functions/GetTotalMints.js';
 const firebaseConfig = {
     apiKey: process.env.fb_key,
     authDomain: process.env.authDomain,
@@ -49,5 +51,24 @@ router.get('/reveal_metadata', async (req, res) => {
     }
 })
 
+router.get('/get_price', async (req, res) => {
+    try {
+        const result = await GetPrice(req) 
+        res.json(result)
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, error: error})
+    }
+})
+
+router.get('/get_total_mints', async (req, res) => {
+    try {
+        const result = await GetTotalMints(req) 
+        res.json(result)
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, error: error})
+    }
+})
 
 router.use(bodyParser.json())
