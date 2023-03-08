@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import dotenv from 'dotenv'
 import { getFirestore, collection, query, getDocs, where, setDoc, doc } from 'firebase/firestore/lite'
-import { GetMetadata } from "./GetMetadata.js"
 import { VerifySignature } from "./VerifySignature.js";
 import { GetProvider } from "./GetProvider.js";
 import { ethers } from "ethers";

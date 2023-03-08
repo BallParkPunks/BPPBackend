@@ -1,17 +1,16 @@
 import express from 'express'
 export const router = express.Router()
+
 import bodyParser from 'body-parser'
-import dotenv from 'dotenv'
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
 import { GetMetadata } from './functions/GetMetadata.js';
-
-dotenv.config()
 import { getFirestore } from 'firebase/firestore/lite'
 import { RevealMetadata } from './functions/RevealMetadata.js';
 import { GetPrice } from './functions/GetPrice.js';
 import { GetTotalMints } from './functions/GetTotalMints.js';
+import dotenv from 'dotenv'
+dotenv.config()
+
 const firebaseConfig = {
     apiKey: process.env.fb_key,
     authDomain: process.env.authDomain,
