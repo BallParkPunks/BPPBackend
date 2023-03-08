@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app"
 import dotenv from 'dotenv'
 import { getFirestore, collection, query, getDocs, where } from 'firebase/firestore/lite'
 dotenv.config()
