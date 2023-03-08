@@ -3,7 +3,7 @@ import { GetProvider } from './GetProvider.js'
 import { nft_abi } from '../abi.js'
 
 export const GetPrice = async (req) => {
-    const type = req.query.type
+    const type = req.query.typeId
     const amount = req.query.amount
 
     const provider = process.env.state === 'testing' ? GetProvider('goerli') : GetProvider('polygon')
