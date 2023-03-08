@@ -9,6 +9,7 @@ import { RevealMetadata } from './functions/RevealMetadata.js';
 import { GetPrice } from './functions/GetPrice.js';
 import { GetTotalMints } from './functions/GetTotalMints.js';
 import dotenv from 'dotenv'
+import { GetAllTypes } from './functions/GetAllTypes.js';
 dotenv.config()
 
 const firebaseConfig = {
@@ -69,6 +70,16 @@ router.get('/get_total_mints', async (req, res) => {
         res.json(result)
     } catch (error) {
         console.log(error)
+        res.json({success: false, error: error})
+    }
+})
+
+router.get('/get_all_types', async (req, res) => {
+    try {
+        const result = await GetAllTypes()
+        
+        res.send(result)
+    } catch (error) {
         res.json({success: false, error: error})
     }
 })
