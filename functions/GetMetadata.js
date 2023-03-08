@@ -15,10 +15,8 @@ const firebaseConfig = {
 const fb = initializeApp(firebaseConfig)
 const db = getFirestore(fb)
 
-export const GetMetadata = async (req) => {
-    const tokenId = req.query.tokenId
-
-    const q = query(collection(db, "metadata"), where("tokenId", "==", tokenId))
+export const GetMetadata = async (tokenId, type) => {
+    const q = query(collection(db, "metadata"), where("tokenId", "==", tokenId), where("type", "==", type))
     const Snapshot = await getDocs(q)
 
     if(Snapshot.docs.length === 0) {
@@ -27,7 +25,7 @@ export const GetMetadata = async (req) => {
 
     const md = Snapshot.docs[0].data()
     if(!md.reveal) {
-        return {image: md.placeholder, name: `Unopened Pack #${tokenId}`}
+        return {image: md.placeholder, name: `Unopened Pack`}
     }
 
     return md

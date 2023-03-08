@@ -31,7 +31,10 @@ if(db) {
 
 router.get('/get_metadata', async (req, res) => {
     try{
-        const result = await GetMetadata(req)
+        const tokenId = req.query.tokenId
+        const type = req.query.typeId
+
+        const result = await GetMetadata(tokenId, type)
 
         res.json(result)
     } catch (error) {
