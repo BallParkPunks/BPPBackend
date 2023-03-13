@@ -24,10 +24,9 @@ const fb = initializeApp(firebaseConfig)
 const db = getFirestore(fb)
 
 export const VerifySignature = async(signature, address, message, tokenId) => {
-    if((Date.now() - message) > 60000) return false;
+    if((Date.now() - parseInt(message)) > 60000) return false;
 
-    let provider = GetProvider( process.env.state === 'production' ? 'polygon' : 'goerli' )
-
+    let provider = GetProvider( process.env.state === 'testing' ? 'goerli' : 'polygon' )
     const contract = new ethers.Contract(process.env.bpp_contract, nft_abi, provider)
 
     // Retrieve all used signatures from DB 
@@ -51,8 +50,8 @@ export const VerifySignature = async(signature, address, message, tokenId) => {
     const recover = ethers.utils.verifyMessage(message, signature)
 
     // Ensure recovered address is equal to 'address'
-    if(recover !== address) console.log(recover)
-    if(recover !== address) return false
+    if(recover.toLowerCase() !== address.toLowerCase()) console.log(recover)
+    if(recover.toLowerCase() !== address.toLowerCase()) return false
 
     const owner = await contract.ownerOf(tokenId)
     if (recover.toLowerCase() !== owner.toLowerCase()) return false
