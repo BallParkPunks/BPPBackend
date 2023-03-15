@@ -15,6 +15,7 @@ const firebaseConfig = {
 const fb = initializeApp(firebaseConfig)
 const db = getFirestore(fb)
 
+// Returns the metadata associated with NFT of given type and ID
 export const GetMetadata = async (tokenId, type) => {
     const q = query(collection(db, "metadata"), where("tokenId", "==", tokenId), where("type", "==", type))
     const Snapshot = await getDocs(q)

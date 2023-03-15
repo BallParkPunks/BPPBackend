@@ -2,6 +2,7 @@ import { ethers } from "ethers"
 import { GetProvider } from "./GetProvider.js"
 import { nft_abi } from "../abi.js"
 
+// Returns details of all types that have been initialized in smart contract
 export const GetAllTypes = async() => {
     const provider = GetProvider(process.env.state === 'testing' ? 'goerli' : 'polygon')
     const bpp = new ethers.Contract(process.env.bpp_contract, nft_abi, provider)

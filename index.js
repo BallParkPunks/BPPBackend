@@ -29,6 +29,7 @@ if(db) {
     console.log('db connected')
 }
 
+// api.link/get_metadata?typeId=123&tokenId=10
 router.get('/get_metadata', async (req, res) => {
     try{
         const tokenId = req.query.tokenId
