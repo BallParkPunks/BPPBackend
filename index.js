@@ -36,7 +36,6 @@ router.get('/get_metadata', async (req, res) => {
         const type = req.query.typeId
 
         const result = await GetMetadata(tokenId, type)
-
         res.json(result)
     } catch (error) {
         console.log(error)
@@ -44,10 +43,15 @@ router.get('/get_metadata', async (req, res) => {
     }
 })
 
+// api.link/get_metadata?tokenId=1234&signature=0x123lkj23l12kj3&message=6486849392&address=0xabcd1234
 router.get('/reveal_metadata', async (req, res) => {
     try{
-        const result = await RevealMetadata(req)
+        const tokenId = req.query.tokenId
+        const signature = req.query.signature
+        const message = req.query.message
+        const address = req.query.address
 
+        const result = await RevealMetadata(tokenId, signature, message, address)
         res.json(result)
     } catch (error) {
         console.log(error)
@@ -55,9 +59,13 @@ router.get('/reveal_metadata', async (req, res) => {
     }
 })
 
+// api.link/get_metadata?typeId=123&amount=3
 router.get('/get_price', async (req, res) => {
     try {
-        const result = await GetPrice(req) 
+        const type = req.query.typeId
+        const amount = req.query.amount
+
+        const result = await GetPrice(type, amount) 
         res.json(result)
     } catch (error) {
         console.log(error)
@@ -65,9 +73,12 @@ router.get('/get_price', async (req, res) => {
     }
 })
 
+// api.link/get_metadata?typeId=123
 router.get('/get_total_mints', async (req, res) => {
     try {
-        const result = await GetTotalMints(req) 
+        const type = req.query.typeId
+
+        const result = await GetTotalMints(type) 
         res.json(result)
     } catch (error) {
         console.log(error)
@@ -75,6 +86,7 @@ router.get('/get_total_mints', async (req, res) => {
     }
 })
 
+// no params required
 router.get('/get_all_types', async (req, res) => {
     try {
         const result = await GetAllTypes()

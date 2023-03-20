@@ -2,9 +2,7 @@ import { ethers } from "ethers"
 import { nft_abi } from "../abi.js"
 import { GetProvider } from "./GetProvider.js"
 
-export const GetTotalMints = async (req) => {
-    const type = req.query.typeId
-    
+export const GetTotalMints = async (type) => {    
     // get provider depending on state (testing/production)
     const provider = process.env.state === 'testing' ? GetProvider('goerli') : GetProvider('polygon')
 

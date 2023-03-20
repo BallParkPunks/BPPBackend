@@ -19,12 +19,7 @@ const firebaseConfig = {
 const fb = initializeApp(firebaseConfig)
 const db = getFirestore(fb)
 
-export const RevealMetadata = async (req) => {
-    const tokenId = req.query.tokenId
-    const signature = req.query.signature
-    const message = req.query.message
-    const address = req.query.address
-
+export const RevealMetadata = async (tokenId, signature, message, address) => {
     if(process.env.state === 'production') {
         /**
          * Verify that the caller is who they claim to be and that they
